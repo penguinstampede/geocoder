@@ -146,6 +146,19 @@ def test_children():
         assert expected_names == [res.address for res in g]
         assert expected_geonames_id == [res.geonames_id for res in g]
 
+def test_postalcode():
+    url = 'http://api.geonames.org/postalCodeLookupJSON?postalcode=6600&country=AT&username=mock'
+    data_file = 'tests/results/geonames_postalcode.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        g = geocoder.geonames('6600', country='AT', method='postalcode', key='mock')
+        assert g.ok
+        assert repr(g) == '<[OK] Geonames - Postalcode #10 results>'
+        assert len(g) == 10
+        assert g.status_code == 200
+
+        expected_names = ["Breitenwang", "Ehenbichl", "Lechaschau", "Musau", "Oberletzen", "Oberpinswang", "Pflach", "Reutte", "Unterletzen", "Unterpinswang"]
+        assert expected_names == [res.place_name for res in g]
 
 def test_children_delegation():
     url = 'http://api.geonames.org/childrenJSON?geonameId=6094817&username=mock'

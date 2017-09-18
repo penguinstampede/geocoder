@@ -53,6 +53,7 @@ from geocoder.geonames import GeonamesQuery
 from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
+from geocoder.geonames_postalcode import GeonamesPostalCode
 
 # Google Services
 from geocoder.google import GoogleQuery
@@ -99,7 +100,8 @@ options = {
         'details': GeonamesDetails,
         'timezone': GeonamesDetails,
         'children': GeonamesChildren,
-        'hierarchy': GeonamesHierarchy
+        'hierarchy': GeonamesHierarchy,
+        'postalcode': GeonamesPostalCode
     },
     'freegeoip': {'geocode': FreeGeoIPQuery},
     'w3w': {
